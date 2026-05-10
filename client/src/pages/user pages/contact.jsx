@@ -44,7 +44,7 @@ export default function Contact() {
       {/* HERO IMAGE */}
       <div className="contact-hero-img">
         <img
-          src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d"
+          src="src/assets/contact-img.jpeg"
           alt="event"
         />
       </div>

@@ -98,7 +98,7 @@
   border: 1px solid rgba(255,255,255,0.15);
 
   box-shadow:
-    0 10px 40px rgba(0,0,0,0.25);
+    0 10px 40px var(--deep);
 
   transition: 0.4s ease;
 }

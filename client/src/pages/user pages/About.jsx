@@ -13,17 +13,17 @@ export default function About() {
     {
       name: "Expo Coordinator",
       role: "Manages exhibitions & large-scale events",
-      img: "https://images.unsplash.com/photo-1521737604893-d14cc237f11d",
+      img: "src/assets/ExpoCordinator-img.jpeg",
     },
     {
       name: "Event Operations Lead",
       role: "Handles venue setup & logistics flow",
-      img: "https://images.unsplash.com/photo-1551836022-deb4988cc6c0",
+      img: "src/assets/EventOrg-img.jpeg",
     },
     {
       name: "Marketing Strategist",
       role: "Promotes events & increases engagement",
-      img: "https://images.unsplash.com/photo-1557804506-669a67965ba0",
+      img: "src/assets/Marketing-img.jpeg",
     },
   ];
 
@@ -64,7 +64,7 @@ export default function About() {
     transition={{ duration: 0.6 }}
   >
     <img
-src="https://images.unsplash.com/photo-1470225620780-dba8ba36b745?auto=format&fit=crop&w=900&q=80"    />
+src="src/assets/about-img.jpeg"/>
   </motion.div>
 </motion.section>
 

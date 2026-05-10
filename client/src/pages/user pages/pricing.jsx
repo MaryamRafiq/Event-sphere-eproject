@@ -127,7 +127,7 @@ export default function Pricing() {
   {/* IMAGE ADDED */}
   <div className="cta-image">
     <img
-      src="https://images.unsplash.com/photo-1511578314322-379afb476865"
+      src="src/assets/pricing-img.jpeg"
       alt="EventSphere Event"
     />
   </div>
