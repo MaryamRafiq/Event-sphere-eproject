@@ -1,10 +1,11 @@
-import { useParams, useNavigate, Link } from "react-router-dom";
-import { useState, useEffect } from "react";
-import "./ExpoDetail.css";
-import UpdateExpoModal from "../../components/expo/UpdateExpoModal";
+import { useParams, useNavigate } from "react-router-dom";
+import { useState } from "react";
+import "./EventsDetail.css";
+import ErrorPage from "../ErrorPage";
+import UpdateEventModal from "../../components/events/UpdateEventModal";
 
-// Static Expo Data (same as ExposPage)
-const STATIC_EXPOS = [
+// Static Events Data (same as EventsPage)
+const STATIC_EVENTS = [
   {
     _id: "1",
     title: "AI & Robotics Summit 2026",
@@ -58,7 +59,7 @@ const STATIC_EXPOS = [
   },
   {
     _id: "4",
-    title: "Contemporary Art Expo",
+    title: "Contemporary Art Event",
     description:
       "Discover groundbreaking contemporary art from emerging and established artists across various mediums and styles.",
     location: "New York, USA",
@@ -92,7 +93,7 @@ const STATIC_EXPOS = [
   },
   {
     _id: "6",
-    title: "Science & Innovation Expo",
+    title: "Science & Innovation Event",
     description:
       "Showcasing cutting-edge scientific research, breakthrough discoveries, and innovative technologies shaping our future.",
     location: "London, UK",
@@ -160,7 +161,7 @@ const STATIC_EXPOS = [
   },
   {
     _id: "10",
-    title: "Gaming & Esports Expo",
+    title: "Gaming & Esports Event",
     description:
       "Experience the latest gaming titles, meet professional esports players, and discover gaming hardware and innovations.",
     location: "Seoul, South Korea",
@@ -175,6 +176,9 @@ const STATIC_EXPOS = [
     ticketPrice: 149,
     tags: ["Gaming", "Esports", "Technology", "Entertainment"],
   },
+
+  // ═══ NEW 10 RECORDS ═══════════════════════════════════════════════
+
   {
     _id: "11",
     title: "Luxury Fashion Summit",
@@ -192,6 +196,7 @@ const STATIC_EXPOS = [
     ticketPrice: 750,
     tags: ["Luxury", "Couture", "HighFashion", "Designer"],
   },
+
   {
     _id: "12",
     title: "International Street Food Festival",
@@ -209,6 +214,7 @@ const STATIC_EXPOS = [
     ticketPrice: 89,
     tags: ["StreetFood", "Culinary", "Festival", "Global"],
   },
+
   {
     _id: "13",
     title: "Modern Art & Design Fair",
@@ -226,6 +232,7 @@ const STATIC_EXPOS = [
     ticketPrice: 220,
     tags: ["ModernArt", "Design", "Architecture", "Installation"],
   },
+
   {
     _id: "14",
     title: "Quantum Computing Conference",
@@ -243,9 +250,10 @@ const STATIC_EXPOS = [
     ticketPrice: 650,
     tags: ["Quantum", "Computing", "Science", "Research"],
   },
+
   {
     _id: "15",
-    title: "Sustainable Fashion Expo",
+    title: "Sustainable Fashion Event",
     description:
       "Showcasing eco-friendly fashion, circular economy, and ethical production practices for the future.",
     location: "Amsterdam, Netherlands",
@@ -260,6 +268,7 @@ const STATIC_EXPOS = [
     ticketPrice: 175,
     tags: ["Sustainable", "EcoFashion", "Ethical", "Circular"],
   },
+
   {
     _id: "16",
     title: "HealthTech & Biotech Summit",
@@ -277,6 +286,7 @@ const STATIC_EXPOS = [
     ticketPrice: 525,
     tags: ["HealthTech", "Biotech", "MedicalAI", "Healthcare"],
   },
+
   {
     _id: "17",
     title: "Creative Directors Forum",
@@ -294,9 +304,10 @@ const STATIC_EXPOS = [
     ticketPrice: 799,
     tags: ["Creative", "Branding", "Design", "Leadership"],
   },
+
   {
-    _id: "18",
-    title: "Space Tech & Aerospace Expo",
+    _id: "",
+    title: "Space Tech & Aerospace Events",
     description:
       "Latest in space exploration, satellite technology, aerospace engineering, and commercial spaceflight.",
     location: "Cape Canaveral, USA",
@@ -323,50 +334,21 @@ const STATUS_CONFIG = {
   completed: { label: "Ended", color: "#94a3b8", bg: "rgba(148,163,184,0.15)" },
 };
 
-export default function ExpoDetail() {
+export default function EventsDetail() {
   const { id } = useParams();
   const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState("overview");
   const [showUpdateModal, setShowUpdateModal] = useState(false);
 
-  const expo = STATIC_EXPOS.find((e) => e._id === id);
+  const events = STATIC_EVENTS.find((e) => e._id === id);
 
-  if (!expo) {
-    return (
-      <div
-        style={{
-          minHeight: "100vh",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          background: "var(--ep-bg)",
-          color: "var(--ep-text)",
-        }}
-      >
-        <div style={{ textAlign: "center" }}>
-          <h1 style={{ fontSize: "3rem", marginBottom: "1rem" }}>404</h1>
-          <p style={{ marginBottom: "2rem" }}>Expo not found</p>
-          <Link
-            to="/expos"
-            style={{
-              padding: "12px 32px",
-              borderRadius: "999px",
-              background: "linear-gradient(135deg, #6c6d91, #340536)",
-              color: "white",
-              textDecoration: "none",
-              fontWeight: 600,
-            }}
-          >
-            Back to Expos
-          </Link>
-        </div>
-      </div>
-    );
+  if (!events) {
+    return <ErrorPage />;
   }
 
-  const statusConfig = STATUS_CONFIG[expo.status] || STATUS_CONFIG.upcoming;
+  const statusConfig = STATUS_CONFIG[events.status] || STATUS_CONFIG.upcoming;
   const attendancePercentage = (
-    (expo.registeredAttendees / expo.maxAttendees) *
+    (events.registeredAttendees / events.maxAttendees) *
     100
   ).toFixed(0);
 
@@ -384,26 +366,22 @@ export default function ExpoDetail() {
               marginBottom: "24px",
             }}
           >
-            <Link to="/expos" className="ed-back">
-              <svg
-                width="16"
-                height="16"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2.5"
-                viewBox="0 0 24 24"
-              >
-                <path d="M19 12H5M12 19l-7-7 7-7" />
-              </svg>
-              Back to Expos
-            </Link>
+            <button
+              onClick={() => {
+                const isAdmin = window.location.pathname.includes("/admin");
+                navigate(isAdmin ? "/admin/adminEvents" : "/events");
+              }}
+              className="back-btn"
+            >
+              ← Back to Events
+            </button>
 
             {/* 👇 NEW: Admin Action Buttons */}
             <div className="ed-admin-actions">
               <button
                 className="ed-admin-btn ed-admin-update"
                 onClick={() => setShowUpdateModal(true)}
-                title="Update Expo"
+                title="Update Event"
               >
                 ✏️ Edit
               </button>
@@ -412,13 +390,13 @@ export default function ExpoDetail() {
                 onClick={() => {
                   if (
                     confirm(
-                      `🗑️ Delete "${expo.title}"?\n\nThis expo will be permanently deleted.`,
+                      `🗑️ Delete "${events.title}"?\n\nThis expo will be permanently deleted.`,
                     )
                   ) {
-                    alert(`✅ "${expo.title}" deleted successfully!`);
+                    alert(`✅ "${events.title}" deleted successfully!`);
                   }
                 }}
-                title="Delete Expo"
+                title="Delete Event"
               >
                 🗑️ Delete
               </button>
@@ -428,8 +406,8 @@ export default function ExpoDetail() {
           {/* Hero Banner */}
           <div className="ed-hero">
             <img
-              src={expo.coverImage}
-              alt={expo.title}
+              src={events.coverImage}
+              alt={events.title}
               className="ed-hero-img"
             />
             <div className="ed-hero-overlay"></div>
@@ -452,27 +430,27 @@ export default function ExpoDetail() {
                     color: "#f5d5e0",
                   }}
                 >
-                  {expo.category}
+                  {events.category}
                 </span>
               </div>
 
-              <h1 className="ed-hero-title">{expo.title}</h1>
+              <h1 className="ed-hero-title">{events.title}</h1>
 
               <div className="ed-hero-meta">
                 <div className="ed-meta-item">
                   <span>📍</span>
-                  <span>{expo.location}</span>
+                  <span>{events.location}</span>
                 </div>
                 <div className="ed-meta-item">
                   <span>📅</span>
                   <span>
-                    {new Date(expo.startDate).toLocaleDateString("en-US", {
+                    {new Date(events.startDate).toLocaleDateString("en-US", {
                       month: "short",
                       day: "numeric",
                       year: "numeric",
                     })}
                     {" - "}
-                    {new Date(expo.endDate).toLocaleDateString("en-US", {
+                    {new Date(events.endDate).toLocaleDateString("en-US", {
                       month: "short",
                       day: "numeric",
                       year: "numeric",
@@ -482,7 +460,7 @@ export default function ExpoDetail() {
                 <div className="ed-meta-item">
                   <span>👥</span>
                   <span>
-                    {expo.registeredAttendees.toLocaleString()} attending
+                    {events.registeredAttendees.toLocaleString()} attending
                   </span>
                 </div>
               </div>
@@ -520,21 +498,21 @@ export default function ExpoDetail() {
                 {activeTab === "overview" && (
                   <>
                     <h2 className="ed-section-title">About This Event</h2>
-                    <p className="ed-description">{expo.description}</p>
+                    <p className="ed-description">{events.description}</p>
                     <p className="ed-description">
-                      Join us for an unforgettable experience at {expo.title},
-                      taking place in {expo.location}. This premier event brings
-                      together industry leaders, innovators, and enthusiasts
-                      from around the world.
+                      Join us for an unforgettable experience at {events.title},
+                      taking place in {events.location}. This premier event
+                      brings together industry leaders, innovators, and
+                      enthusiasts from around the world.
                     </p>
                     <p className="ed-description">
                       Whether you're looking to network, learn about the latest
-                      trends, or showcase your innovations, this expo offers
+                      trends, or showcase your innovations, this event offers
                       something for everyone. Don't miss this opportunity to be
                       part of something extraordinary.
                     </p>
 
-                    {expo.tags && expo.tags.length > 0 && (
+                    {events.tags && events.tags.length > 0 && (
                       <>
                         <h3
                           style={{
@@ -548,7 +526,7 @@ export default function ExpoDetail() {
                           Event Tags
                         </h3>
                         <div className="ed-tags">
-                          {expo.tags.map((tag, i) => (
+                          {events.tags.map((tag, i) => (
                             <span key={i} className="ed-tag">
                               #{tag}
                             </span>
@@ -582,7 +560,7 @@ export default function ExpoDetail() {
                             fontWeight: 600,
                           }}
                         >
-                          {expo.location}
+                          {events.location}
                         </p>
                       </div>
                       <div>
@@ -604,7 +582,7 @@ export default function ExpoDetail() {
                             fontWeight: 600,
                           }}
                         >
-                          {new Date(expo.startDate).toLocaleDateString(
+                          {new Date(events.startDate).toLocaleDateString(
                             "en-US",
                             {
                               weekday: "long",
@@ -614,12 +592,15 @@ export default function ExpoDetail() {
                             },
                           )}
                           {" - "}
-                          {new Date(expo.endDate).toLocaleDateString("en-US", {
-                            weekday: "long",
-                            month: "long",
-                            day: "numeric",
-                            year: "numeric",
-                          })}
+                          {new Date(events.endDate).toLocaleDateString(
+                            "en-US",
+                            {
+                              weekday: "long",
+                              month: "long",
+                              day: "numeric",
+                              year: "numeric",
+                            },
+                          )}
                         </p>
                       </div>
                       <div>
@@ -641,7 +622,7 @@ export default function ExpoDetail() {
                             fontWeight: 600,
                           }}
                         >
-                          {expo.category}
+                          {events.category}
                         </p>
                       </div>
                       <div>
@@ -663,7 +644,8 @@ export default function ExpoDetail() {
                             fontWeight: 600,
                           }}
                         >
-                          {expo.maxAttendees.toLocaleString()} attendees maximum
+                          {events.maxAttendees.toLocaleString()} attendees
+                          maximum
                         </p>
                       </div>
                     </div>
@@ -707,7 +689,7 @@ export default function ExpoDetail() {
               {/* Pricing Card */}
               <div className="ed-sidebar-card" style={{ position: "relative" }}>
                 <div className="ed-price-tag">
-                  {expo.ticketPrice === 0 ? "FREE" : `$${expo.ticketPrice}`}
+                  {events.ticketPrice === 0 ? "FREE" : `$${events.ticketPrice}`}
                 </div>
                 <div className="ed-price-label">Per ticket</div>
 
@@ -725,7 +707,7 @@ export default function ExpoDetail() {
                       Attendees
                     </span>
                     <span className="ed-stat-value">
-                      {expo.registeredAttendees.toLocaleString()}
+                      {events.registeredAttendees.toLocaleString()}
                     </span>
                   </div>
                   <div className="ed-stat-row">
@@ -735,7 +717,7 @@ export default function ExpoDetail() {
                     </span>
                     <span className="ed-stat-value">
                       {(
-                        expo.maxAttendees - expo.registeredAttendees
+                        events.maxAttendees - events.registeredAttendees
                       ).toLocaleString()}
                     </span>
                   </div>
@@ -744,7 +726,7 @@ export default function ExpoDetail() {
                       <span>📍</span>
                       Location
                     </span>
-                    <span className="ed-stat-value">{expo.location}</span>
+                    <span className="ed-stat-value">{events.location}</span>
                   </div>
                 </div>
 
@@ -756,7 +738,8 @@ export default function ExpoDetail() {
                 </div>
                 <div className="ed-progress-text">
                   {attendancePercentage}% filled •{" "}
-                  {expo.maxAttendees - expo.registeredAttendees} spots remaining
+                  {events.maxAttendees - events.registeredAttendees} spots
+                  remaining
                 </div>
               </div>
 
@@ -829,8 +812,8 @@ export default function ExpoDetail() {
       </div>
 
       {/* 👇 Update Modal */}
-      <UpdateExpoModal
-        expo={expo}
+      <UpdateEventModal
+        expo={events}
         open={showUpdateModal}
         onClose={() => setShowUpdateModal(false)}
       />

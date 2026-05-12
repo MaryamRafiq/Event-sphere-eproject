@@ -2,33 +2,16 @@
 
 /* ROOT */
 .ep-root {
-  min-height: 100vh;
-  background: var(--darkest);
+  width: 100%;
+  min-width: 0;
+  min-height: 100%;
   color: var(--accent);
   overflow-x: hidden;
   position: relative;
-}
 
-/* BACKGROUND EFFECTS */
-.ep-root::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  background:
-    radial-gradient(circle at top left, var(--deep), transparent 35%),
-    radial-gradient(circle at bottom right, var(--primary), transparent 30%);
-  opacity: 0.35;
-  pointer-events: none;
+  /* IMPORTANT */
+  background: transparent;
 }
-
-.ep-root::after {
-  content: "";
-  position: fixed;
-  inset: 0;
-  backdrop-filter: blur(100px);
-  pointer-events: none;
-}
-
 /* CONTAINER */
 .ep-inner {
   width: 100%;
@@ -319,13 +302,34 @@
   justify-content: space-between;
   align-items: center;
   gap: 20px;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
 }
 
 .ep-pills {
   display: flex;
-  gap: 10px;
-  flex-wrap: wrap;
+  gap: 8px;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  padding: 4px 0;
+  scrollbar-width: thin;
+  -webkit-overflow-scrolling: touch;
+}
+
+.ep-pills::-webkit-scrollbar {
+  height: 4px;
+}
+
+.ep-pills::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.ep-pills::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 2px;
+}
+
+.ep-pills::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.5);
 }
 
 .ep-pill {
@@ -544,25 +548,38 @@
   }
 }
 
+/* =========================================================
+   CREATE BUTTON MOBILE FIX
+========================================================= */
+
 .ep-create-wrap {
   display: flex;
   justify-content: flex-end;
   margin-top: 20px;
+  width: 100%;
 }
 
 .ep-create-btn {
   border: none;
   cursor: pointer;
-  padding: 14px 22px;
+  padding: 14px 24px;
   border-radius: 16px;
   background: var(--secondary);
   color: white;
   font-weight: 700;
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 10px;
   transition: 0.3s ease;
   box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
+
+  width: fit-content;
+  min-width: 160px;
+  min-height: 52px;
+
+  white-space: nowrap;
+  font-size: 14px;
 }
 
 .ep-create-btn:hover {
@@ -570,12 +587,50 @@
   box-shadow: 0 18px 40px rgba(0, 0, 0, 0.35);
 }
 
+/* =========================================================
+   TABLET
+========================================================= */
 @media (max-width: 768px) {
+  .ep-create-wrap {
+    justify-content: center;
+    width: 100%;
+  }
+
   .ep-create-btn {
-    top: 20px;
-    right: 20px;
-    width: 52px;
-    height: 52px;
-    font-size: 22px;
+    width: 100%;
+    max-width: 320px;
+
+    padding: 14px 18px;
+    border-radius: 14px;
+
+    font-size: 14px;
+    min-height: 50px;
+  }
+}
+
+/* =========================================================
+   SMALL MOBILE
+========================================================= */
+@media (max-width: 480px) {
+  .ep-create-wrap {
+    margin-top: 16px;
+  }
+
+  .ep-create-btn {
+    width: 100%;
+    max-width: 100%;
+
+    padding: 13px 16px;
+    font-size: 13px;
+
+    border-radius: 12px;
+    min-height: 48px;
+
+    gap: 8px;
+  }
+
+  .ep-create-btn svg {
+    width: 18px;
+    height: 18px;
   }
 }

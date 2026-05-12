@@ -1,7 +1,7 @@
 import { useEffect } from "react";
-import "./CreateExpoModal.css";
+import "./CreateEventModal.css";
 
-function CreateExpoModal({ open, onClose }) {
+function UpdateEventModal({ open, onClose }) {
   useEffect(() => {
     document.body.style.overflow = open ? "hidden" : "auto";
     return () => (document.body.style.overflow = "auto");
@@ -11,22 +11,17 @@ function CreateExpoModal({ open, onClose }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    alert("Expo has been created successfully! 🎉");
+    alert("Event has been Updated successfully! 🎉");
     onClose();
   };
 
   return (
     <>
-
-
       <div className="cem-overlay" onClick={onClose}>
-        <div
-          className="cem-modal"
-          onClick={(e) => e.stopPropagation()}
-        >
+        <div className="cem-modal" onClick={(e) => e.stopPropagation()}>
           <div className="cem-header">
             <h2 className="cem-title">
-              Create <span>New Expo</span>
+              Update <span>Event</span>
             </h2>
             <button className="cem-close" onClick={onClose}>
               ✕
@@ -36,11 +31,11 @@ function CreateExpoModal({ open, onClose }) {
           <form className="cem-body" onSubmit={handleSubmit}>
             <div className="cem-grid">
               <div className="cem-field">
-                <label className="cem-label">Expo Title</label>
+                <label className="cem-label">Event Title</label>
                 <input
                   className="cem-input"
                   type="text"
-                  placeholder="Enter expo title"
+                  placeholder="Enter event title"
                   required
                 />
               </div>
@@ -64,7 +59,7 @@ function CreateExpoModal({ open, onClose }) {
                 <input
                   className="cem-input"
                   type="text"
-                  placeholder="Expo location"
+                  placeholder="Event location"
                   required
                 />
               </div>
@@ -94,7 +89,7 @@ function CreateExpoModal({ open, onClose }) {
                 <label className="cem-label">Description</label>
                 <textarea
                   className="cem-textarea"
-                  placeholder="Describe your expo..."
+                  placeholder="Describe your event..."
                   required
                 />
               </div>
@@ -109,7 +104,7 @@ function CreateExpoModal({ open, onClose }) {
                 Cancel
               </button>
               <button type="submit" className="cem-btn save">
-                Save Expo
+                Update Event
               </button>
             </div>
           </form>
@@ -119,4 +114,4 @@ function CreateExpoModal({ open, onClose }) {
   );
 }
 
-export default CreateExpoModal;
+export default UpdateEventModal;
