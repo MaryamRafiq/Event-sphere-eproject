@@ -2,7 +2,7 @@
 
 .ed-root {
   min-height: 100vh;
-  background: var(--darkest);
+  background: transparent;
   color: var(--accent);
   font-family: "DM Sans", sans-serif;
   position: relative;
@@ -352,7 +352,6 @@
   }
 }
 
-
 /* ACTION BUTTONS WRAPPER */
 .ed-admin-actions {
   display: flex;
@@ -395,4 +394,27 @@
 .ed-admin-delete:hover {
   transform: translateY(-2px);
   box-shadow: 0 10px 25px rgba(255, 77, 109, 0.4);
+}
+
+.back-btn {
+  all: unset; /* 👈 ye sab inherited styling hata deta hai */
+
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin: 10px;
+  padding: 10px 10px !important;
+  font-size: 15px !important;
+  font-weight: 500;
+
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 8px;
+
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--ed-text);
+
+  cursor: pointer;
+  white-space: nowrap;
+
+  line-height: 1;
 }

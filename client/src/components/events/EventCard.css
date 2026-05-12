@@ -11,26 +11,26 @@
   overflow: hidden;
   border-radius: 28px;
 
-  background: rgba(255,255,255,.05);
-  border: 1px solid rgba(255,255,255,.08);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.08);
 
   backdrop-filter: blur(28px);
 
-  transition: all .45s cubic-bezier(.19,1,.22,1);
+  transition: all 0.45s cubic-bezier(0.19, 1, 0.22, 1);
 
   box-shadow:
-    0 12px 40px rgba(0,0,0,.25),
-    inset 0 1px 0 rgba(255,255,255,.06);
+    0 12px 40px rgba(0, 0, 0, 0.25),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06);
 }
 
 .light-mode .ecard-inner {
-  background: rgba(255,255,255,.12);
+  background: rgba(255, 255, 255, 0.12);
 
-  border: 1px solid rgba(255,255,255,.24);
+  border: 1px solid rgba(255, 255, 255, 0.24);
 
   box-shadow:
-    0 12px 40px rgba(52,5,54,.2),
-    inset 0 1px 0 rgba(255,255,255,.25);
+    0 12px 40px rgba(52, 5, 54, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.25);
 }
 
 .ecard-wrapper:hover .ecard-inner {
@@ -39,8 +39,8 @@
   border-color: var(--accent) !important;
 
   box-shadow:
-    0 30px 60px rgba(0,0,0,.3),
-    0 0 40px rgba(255,255,255,.12) !important;
+    0 30px 60px rgba(0, 0, 0, 0.3),
+    0 0 40px rgba(255, 255, 255, 0.12) !important;
 }
 
 .ecard-inner::before {
@@ -55,7 +55,7 @@
 
   background: var(--secondary);
 
-  opacity: .9;
+  opacity: 0.9;
   z-index: 4;
 }
 
@@ -72,7 +72,7 @@
   height: 100%;
   object-fit: cover;
 
-  transition: transform .8s cubic-bezier(.19,1,.22,1);
+  transition: transform 0.8s cubic-bezier(0.19, 1, 0.22, 1);
 }
 
 .ecard-wrapper:hover .ecard-img {
@@ -83,11 +83,7 @@
   position: absolute;
   inset: 0;
 
-  background: linear-gradient(
-    to top,
-    rgba(0,0,0,.8),
-    transparent 40%
-  );
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent 40%);
 }
 
 .ecard-shimmer {
@@ -97,7 +93,7 @@
   background: linear-gradient(
     115deg,
     transparent 20%,
-    rgba(255,255,255,.2) 50%,
+    rgba(255, 255, 255, 0.2) 50%,
     transparent 80%
   );
 
@@ -107,7 +103,7 @@
 }
 
 .ecard-wrapper:hover .ecard-shimmer {
-  animation: ecardShine 1.2s cubic-bezier(.19,1,.22,1) forwards;
+  animation: ecardShine 1.2s cubic-bezier(0.19, 1, 0.22, 1) forwards;
 }
 
 @keyframes ecardShine {
@@ -129,19 +125,19 @@
 
   border-radius: 20px;
 
-  background: rgba(0,0,0,.5);
+  background: rgba(0, 0, 0, 0.5);
 
   color: var(--accent);
 
   font-size: 12px;
   font-weight: 600;
 
-  letter-spacing: .1em;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
 
   backdrop-filter: blur(16px);
 
-  border: 1px solid rgba(255,255,255,.2);
+  border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .ecard-status-badge {
@@ -159,7 +155,7 @@
 
   border-radius: 20px;
 
-  background: rgba(0,0,0,.5);
+  background: rgba(0, 0, 0, 0.5);
 
   color: var(--accent);
 
@@ -168,7 +164,7 @@
 
   backdrop-filter: blur(16px);
 
-  border: 1px solid rgba(255,255,255,.2);
+  border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .ecard-dot {
@@ -218,13 +214,13 @@
 
   color: var(--accent) !important;
 
-  font-family: 'Cormorant Garamond', serif !important;
+  font-family: "Cormorant Garamond", serif !important;
 
   font-size: 1.4rem !important;
   font-weight: 700 !important;
 
   line-height: 1.3 !important;
-  letter-spacing: -.02em;
+  letter-spacing: -0.02em;
 
   display: -webkit-box;
   -webkit-line-clamp: 2;
@@ -236,7 +232,7 @@
 .ecard-price {
   flex-shrink: 0;
 
-  font-family: 'Syne', sans-serif !important;
+  font-family: "Syne", sans-serif !important;
 
   font-size: 1.1rem !important;
   font-weight: 700 !important;
@@ -252,7 +248,7 @@
 .ecard-desc {
   color: var(--accent) !important;
 
-  opacity: .75 !important;
+  opacity: 0.75 !important;
 
   line-height: 1.7 !important;
 
@@ -278,7 +274,7 @@
   margin-bottom: 28px;
   padding-top: 20px;
 
-  border-top: 1px solid rgba(255,255,255,.1);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .ecard-stat {
@@ -288,11 +284,11 @@
 
   color: var(--accent) !important;
 
-  opacity: .8 !important;
+  opacity: 0.8 !important;
 
   font-size: 13px !important;
 
-  font-family: 'Syne', sans-serif !important;
+  font-family: "Syne", sans-serif !important;
 }
 
 /* BUTTON */
@@ -316,26 +312,26 @@
 
   text-decoration: none !important;
 
-  font-family: 'Syne', sans-serif !important;
+  font-family: "Syne", sans-serif !important;
 
   font-size: 14px !important;
   font-weight: 600 !important;
 
-  letter-spacing: .02em !important;
+  letter-spacing: 0.02em !important;
   text-transform: uppercase !important;
 
-  transition: all .4s cubic-bezier(.19,1,.22,1) !important;
+  transition: all 0.4s cubic-bezier(0.19, 1, 0.22, 1) !important;
 
   position: relative !important;
   overflow: hidden !important;
 
-  box-shadow: 0 12px 30px rgba(0,0,0,.25) !important;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25) !important;
 }
 
 .ecard-btn:hover {
   transform: translateY(-3px) !important;
 
-  box-shadow: 0 20px 40px rgba(0,0,0,.35) !important;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.35) !important;
 }
 
 /* LIST MODE */
@@ -356,7 +352,6 @@
 /* MOBILE */
 
 @media (max-width: 768px) {
-
   .ecard-img-box {
     height: 220px;
   }

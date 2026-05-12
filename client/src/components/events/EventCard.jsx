@@ -1,6 +1,7 @@
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
-import "./ExpoCard.css";
+import "./EventCard.css";
+import { useNavigate } from "react-router-dom";
 
 const STATUS_CONFIG = {
   upcoming: { label: "Upcoming", cls: "upcoming" },
@@ -8,15 +9,24 @@ const STATUS_CONFIG = {
   completed: { label: "Ended", cls: "completed" },
 };
 
-export default function ExpoCard({ expo }) {
+export default function EventCard({ events }) {
   const [mounted, setMounted] = useState(false);
+  const navigate = useNavigate();
+
+  const handleViewDetails = () => {
+    const isAdmin = window.location.pathname.includes("/admin");
+    const url = isAdmin
+      ? `/admin/adminEvents/${events._id}`
+      : `/events/${events._id}`;
+    navigate(url);
+  };
 
   useEffect(() => {
     setTimeout(() => setMounted(true), 100);
   }, []);
 
-  const st = STATUS_CONFIG[expo.status] || STATUS_CONFIG.upcoming;
-  const attendees = expo.registeredAttendees || 0;
+  const st = STATUS_CONFIG[events.status] || STATUS_CONFIG.upcoming;
+  const attendees = events.registeredAttendees || 0;
 
   return (
     <div
@@ -27,14 +37,12 @@ export default function ExpoCard({ expo }) {
       }}
     >
       <div className="ecard-inner">
-
         {/* IMAGE */}
         <div className="ecard-img-box">
-
-          {expo.coverImage ? (
+          {events.coverImage ? (
             <img
-              src={expo.coverImage}
-              alt={expo.title}
+              src={events.coverImage}
+              alt={events.title}
               className="ecard-img"
               loading="lazy"
             />
@@ -56,16 +64,14 @@ export default function ExpoCard({ expo }) {
                 fontFamily: "'Cormorant Garamond', serif",
               }}
             >
-              {(expo.title || "E")[0].toUpperCase()}
+              {(events.title || "E")[0].toUpperCase()}
             </div>
           )}
 
           <div className="ecard-img-fade" />
           <div className="ecard-shimmer" />
 
-          <div className="ecard-cat-tag">
-            {expo.category}
-          </div>
+          <div className="ecard-cat-tag">{events.category}</div>
 
           <div className="ecard-status-badge">
             <span className={`ecard-dot ${st.cls}`} />
@@ -75,27 +81,17 @@ export default function ExpoCard({ expo }) {
 
         {/* CONTENT */}
         <div className="ecard-content">
-
           <div className="ecard-header">
-
-            <h3 className="ecard-title">
-              {expo.title}
-            </h3>
+            <h3 className="ecard-title">{events.title}</h3>
 
             <span className="ecard-price">
-              {expo.ticketPrice === 0
-                ? "FREE"
-                : `$${expo.ticketPrice}`}
+              {events.ticketPrice === 0 ? "FREE" : `$${events.ticketPrice}`}
             </span>
-
           </div>
 
-          <p className="ecard-desc">
-            {expo.description}
-          </p>
+          <p className="ecard-desc">{events.description}</p>
 
           <div className="ecard-stats">
-
             <div className="ecard-stat">
               <span>📍</span>
 
@@ -106,7 +102,7 @@ export default function ExpoCard({ expo }) {
                   whiteSpace: "nowrap",
                 }}
               >
-                {expo.location}
+                {events.location}
               </span>
             </div>
 
@@ -114,15 +110,12 @@ export default function ExpoCard({ expo }) {
               <span>📅</span>
 
               <span>
-                {expo.startDate
-                  ? new Date(expo.startDate).toLocaleDateString(
-                      "en-US",
-                      {
-                        month: "short",
-                        day: "numeric",
-                        year: "numeric",
-                      }
-                    )
+                {events.startDate
+                  ? new Date(events.startDate).toLocaleDateString("en-US", {
+                      month: "short",
+                      day: "numeric",
+                      year: "numeric",
+                    })
                   : "TBA"}
               </span>
             </div>
@@ -132,18 +125,14 @@ export default function ExpoCard({ expo }) {
 
               <span>
                 {attendees.toLocaleString()} /
-                {expo.maxAttendees?.toLocaleString() || "∞"}
+                {events.maxAttendees?.toLocaleString() || "∞"}
               </span>
             </div>
           </div>
 
-          <Link
-            to={`/expos/${expo._id}`}
-            className="ecard-btn"
-          >
+          <button onClick={handleViewDetails} className="ecard-btn">
             View Details →
-          </Link>
-
+          </button>
         </div>
       </div>
     </div>

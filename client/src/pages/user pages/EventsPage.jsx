@@ -1,7 +1,7 @@
-import { useState, useEffect, useRef } from "react";
-import ExpoCard from "../../components/expo/ExpoCard";
-import CreateExpoModal from "../../components/expo/CreateExpoModal"; // Add this import
-import "./ExpoPage.css";
+import { useState, useRef } from "react";
+import EventCard from "../../components/events/EventCard";
+import CreateEventModal from "../../components/events/CreateEventModal"; // Add this import
+import "./EventsPage.css";
 
 /* ─── DATA ──────────────────────────────────────────────────── */
 const CATEGORIES = [
@@ -14,9 +14,8 @@ const CATEGORIES = [
   "Science",
   "Other",
 ];
-const STATUSES = ["All", "upcoming", "ongoing", "completed"];
 
-const STATIC_EXPOS = [
+const STATIC_EVENTS = [
   // ═══ EXISTING 10 RECORDS ═══════════════════════════════════════════
   {
     _id: "1",
@@ -71,7 +70,7 @@ const STATIC_EXPOS = [
   },
   {
     _id: "4",
-    title: "Contemporary Art Expo",
+    title: "Contemporary Art Event",
     description:
       "Discover groundbreaking contemporary art from emerging and established artists across various mediums and styles.",
     location: "New York, USA",
@@ -105,7 +104,7 @@ const STATIC_EXPOS = [
   },
   {
     _id: "6",
-    title: "Science & Innovation Expo",
+    title: "Science & Innovation Event",
     description:
       "Showcasing cutting-edge scientific research, breakthrough discoveries, and innovative technologies shaping our future.",
     location: "London, UK",
@@ -173,7 +172,7 @@ const STATIC_EXPOS = [
   },
   {
     _id: "10",
-    title: "Gaming & Esports Expo",
+    title: "Gaming & Esports Event",
     description:
       "Experience the latest gaming titles, meet professional esports players, and discover gaming hardware and innovations.",
     location: "Seoul, South Korea",
@@ -265,7 +264,7 @@ const STATIC_EXPOS = [
 
   {
     _id: "15",
-    title: "Sustainable Fashion Expo",
+    title: "Sustainable Fashion Event",
     description:
       "Showcasing eco-friendly fashion, circular economy, and ethical production practices for the future.",
     location: "Amsterdam, Netherlands",
@@ -319,7 +318,7 @@ const STATIC_EXPOS = [
 
   {
     _id: "",
-    title: "Space Tech & Aerospace Expo",
+    title: "Space Tech & Aerospace Events",
     description:
       "Latest in space exploration, satellite technology, aerospace engineering, and commercial spaceflight.",
     location: "Cape Canaveral, USA",
@@ -353,29 +352,29 @@ const TICKER = [
   "🔴 LIVE: World Food Festival Tokyo",
   "🟣 FEATURED: Art Biennale NYC",
   "🔴 LIVE: Digital Marketing Summit Mumbai",
-  "🟡 SOON: Gaming Expo Seoul",
-  "🟣 FEATURED: Science Expo London",
+  "🟡 SOON: Gaming Event Seoul",
+  "🟣 FEATURED: Science Event London",
 ];
 
 /* ─── SCROLL TOP HOOK ───────────────────────────────────────── */
-function useScrollTop() {
-  const [show, setShow] = useState(false);
-  useEffect(() => {
-    const fn = () => setShow(window.scrollY > 400);
-    window.addEventListener("scroll", fn, { passive: true });
-    return () => window.removeEventListener("scroll", fn);
-  }, []);
-  return show;
-}
+// function useScrollTop() {
+//   const [show, setShow] = useState(false);
+//   useEffect(() => {
+//     const fn = () => setShow(window.scrollY > 400);
+//     window.addEventListener("scroll", fn, { passive: true });
+//     return () => window.removeEventListener("scroll", fn);
+//   }, []);
+//   return show;
+// }
 
 /* ════════════════════════════════════════════════════════════ */
-export default function ExposPage() {
+export default function EventsPage() {
   const [category, setCategory] = useState("All");
   const [status, setStatus] = useState("All");
   const [search, setSearch] = useState("");
   const [viewMode, setViewMode] = useState("grid");
   const [createModalOpen, setCreateModalOpen] = useState(false);
-  const showScrollTop = useScrollTop();
+  // const showScrollTop = useScrollTop();
   const headerRef = useRef(null);
 
   const isActive = category !== "All" || status !== "All" || search !== "";
@@ -385,7 +384,7 @@ export default function ExposPage() {
     setSearch("");
   };
 
-  const filtered = STATIC_EXPOS.filter((e) => {
+  const filtered = STATIC_EVENTS.filter((e) => {
     const mc = category === "All" || e.category === category;
     const ms = status === "All" || e.status === status;
     const mq =
@@ -411,7 +410,7 @@ export default function ExposPage() {
               <div className="ep-eyebrow">
                 <div className="ep-eyebrow-line" />
                 <div className="ep-eyebrow-dot" />
-                EventSphere — Expo Directory
+                EventSphere — Event Directory
               </div>
               <h1 className="ep-title">
                 Discover the world's
@@ -421,7 +420,7 @@ export default function ExposPage() {
                 events
               </h1>
               <p className="ep-subtitle">
-                Curated expos across technology, art, fashion, science &amp;
+                Curated events across technology, art, fashion, science &amp;
                 more. Find your next great experience.
               </p>
             </div>
@@ -563,7 +562,7 @@ export default function ExposPage() {
               >
                 <path d="M12 5v14M5 12h14" />
               </svg>
-              Create Expo
+              Create Event
             </button>
           </div>
 
@@ -581,7 +580,7 @@ export default function ExposPage() {
               )}
             </h2>
             <div className="ep-results-meta">
-              {filtered.length} of {STATIC_EXPOS.length} total
+              {filtered.length} of {STATIC_EVENTS.length} total
             </div>
           </div>
 
@@ -599,16 +598,16 @@ export default function ExposPage() {
             </div>
           ) : (
             <div className={viewMode === "grid" ? "ep-grid" : "ep-list"}>
-              {filtered.map((expo) => (
-                <ExpoCard key={expo._id} expo={expo} />
+              {filtered.map((events) => (
+                <EventCard key={events._id} events={events} />
               ))}
             </div>
           )}
         </div>
       </div>
 
-      {/* ── CREATE EXPO MODAL ── */}
-      <CreateExpoModal open={createModalOpen} onClose={handleModalClose} />
+      {/* ── CREATE Event MODAL ── */}
+      <CreateEventModal open={createModalOpen} onClose={handleModalClose} />
     </>
   );
 }
