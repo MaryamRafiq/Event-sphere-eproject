@@ -23,6 +23,7 @@ function UpdateEventModal({ open, onClose }) {
             <h2 className="cem-title">
               Update <span>Event</span>
             </h2>
+
             <button className="cem-close" onClick={onClose}>
               ✕
             </button>
@@ -32,6 +33,7 @@ function UpdateEventModal({ open, onClose }) {
             <div className="cem-grid">
               <div className="cem-field">
                 <label className="cem-label">Event Title</label>
+
                 <input
                   className="cem-input"
                   type="text"
@@ -42,6 +44,7 @@ function UpdateEventModal({ open, onClose }) {
 
               <div className="cem-field">
                 <label className="cem-label">Category</label>
+
                 <select className="cem-select" required>
                   <option value="">Select category</option>
                   <option>Technology</option>
@@ -56,6 +59,7 @@ function UpdateEventModal({ open, onClose }) {
 
               <div className="cem-field">
                 <label className="cem-label">Location</label>
+
                 <input
                   className="cem-input"
                   type="text"
@@ -66,6 +70,7 @@ function UpdateEventModal({ open, onClose }) {
 
               <div className="cem-field">
                 <label className="cem-label">Ticket Price</label>
+
                 <input
                   className="cem-input"
                   type="number"
@@ -75,18 +80,33 @@ function UpdateEventModal({ open, onClose }) {
                 />
               </div>
 
+              {/* IMAGE URL FIELD */}
+              <div className="cem-field full">
+                <label className="cem-label">Event Image URL</label>
+
+                <input
+                  className="cem-input cem-image-input"
+                  type="url"
+                  placeholder="https://example.com/event-image.jpg"
+                  required
+                />
+              </div>
+
               <div className="cem-field">
                 <label className="cem-label">Start Date</label>
+
                 <input className="cem-input" type="date" required />
               </div>
 
               <div className="cem-field">
                 <label className="cem-label">End Date</label>
+
                 <input className="cem-input" type="date" required />
               </div>
 
               <div className="cem-field full">
                 <label className="cem-label">Description</label>
+
                 <textarea
                   className="cem-textarea"
                   placeholder="Describe your event..."
@@ -103,6 +123,7 @@ function UpdateEventModal({ open, onClose }) {
               >
                 Cancel
               </button>
+
               <button type="submit" className="cem-btn save">
                 Update Event
               </button>

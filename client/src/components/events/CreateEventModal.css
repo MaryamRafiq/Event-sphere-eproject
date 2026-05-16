@@ -1,21 +1,37 @@
 .cem-overlay {
   position: fixed;
   inset: 0;
+
   background: rgba(0, 0, 0, 0.65);
   backdrop-filter: blur(12px);
+
   display: flex;
   align-items: center;
   justify-content: center;
+
   z-index: 9999;
-  padding: 15px;
+
+  padding: 20px;
+
+  overflow-y: auto;
+  overflow-x: hidden;
+
+  -webkit-overflow-scrolling: touch;
+
   animation: fadeIn 0.3s ease;
 }
+
+/* =========================================================
+   MODAL
+========================================================= */
 
 .cem-modal {
   width: 100%;
   max-width: 520px;
+
   border-radius: 20px;
   overflow: hidden;
+
   position: relative;
 
   background: var(--darkest);
@@ -27,6 +43,10 @@
 
   animation: popup 0.35s ease;
   backdrop-filter: blur(20px);
+
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
 }
 
 /* LIGHT MODE */
@@ -40,48 +60,10 @@ body.light-mode .cem-modal {
     0 0 0 1px rgba(255, 255, 255, 0.5) !important;
 }
 
-/* INPUTS LIGHT MODE */
-.light-mode .cem-input,
-.light-mode .cem-select,
-.light-mode .cem-textarea,
-body.light-mode .cem-input,
-body.light-mode .cem-select,
-body.light-mode .cem-textarea {
-  background: rgba(255, 255, 255, 0.85) !important;
-  border-color: rgba(0, 0, 0, 0.15) !important;
-  color: var(--accent) !important;
+/* =========================================================
+   ANIMATIONS
+========================================================= */
 
-  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.05);
-}
-
-.light-mode .cem-input:focus,
-.light-mode .cem-select:focus,
-.light-mode .cem-textarea:focus,
-body.light-mode .cem-input:focus,
-body.light-mode .cem-select:focus,
-body.light-mode .cem-textarea:focus {
-  background: #fff !important;
-  border-color: var(--deep) !important;
-
-  box-shadow:
-    0 0 0 3px rgba(52, 33, 55, 0.15),
-    inset 0 1px 3px rgba(0, 0, 0, 0.05) !important;
-}
-
-/* OPTIONS */
-.light-mode .cem-select option,
-body.light-mode .cem-select option {
-  background: #fff !important;
-  color: var(--accent) !important;
-}
-
-/* HEADER */
-.light-mode .cem-header,
-body.light-mode .cem-header {
-  border-bottom-color: rgba(0, 0, 0, 0.12) !important;
-}
-
-/* ANIMATIONS */
 @keyframes popup {
   from {
     opacity: 0;
@@ -104,7 +86,10 @@ body.light-mode .cem-header {
   }
 }
 
-/* HEADER */
+/* =========================================================
+   HEADER
+========================================================= */
+
 .cem-header {
   padding: 24px 24px 16px;
 
@@ -114,6 +99,11 @@ body.light-mode .cem-header {
   align-items: center;
   justify-content: space-between;
   gap: 16px;
+}
+
+.light-mode .cem-header,
+body.light-mode .cem-header {
+  border-bottom-color: rgba(0, 0, 0, 0.12) !important;
 }
 
 .cem-title {
@@ -158,12 +148,35 @@ body.light-mode .cem-header {
   transform: rotate(90deg);
 }
 
-/* BODY */
+/* =========================================================
+   BODY
+========================================================= */
+
 .cem-body {
   padding: 24px;
+
+  overflow-y: auto;
+  overflow-x: hidden;
+
+  flex: 1;
+
+  scrollbar-width: thin;
 }
 
-/* GRID */
+/* SCROLLBAR */
+.cem-body::-webkit-scrollbar {
+  width: 6px;
+}
+
+.cem-body::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+}
+
+/* =========================================================
+   GRID
+========================================================= */
+
 .cem-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -180,7 +193,10 @@ body.light-mode .cem-header {
   grid-column: 1 / -1;
 }
 
-/* LABEL */
+/* =========================================================
+   LABEL
+========================================================= */
+
 .cem-label {
   font-size: 12px;
   letter-spacing: 0.06em;
@@ -192,7 +208,10 @@ body.light-mode .cem-header {
   opacity: 0.8;
 }
 
-/* INPUTS */
+/* =========================================================
+   INPUTS
+========================================================= */
+
 .cem-input,
 .cem-select,
 .cem-textarea {
@@ -216,6 +235,11 @@ body.light-mode .cem-header {
   backdrop-filter: blur(10px);
 }
 
+/* NEW IMAGE INPUT */
+.cem-image-input {
+  word-break: break-word;
+}
+
 /* PLACEHOLDER */
 .cem-input::placeholder,
 .cem-textarea::placeholder {
@@ -223,7 +247,10 @@ body.light-mode .cem-header {
   opacity: 0.5;
 }
 
-/* SELECT */
+/* =========================================================
+   SELECT
+========================================================= */
+
 .cem-select {
   padding-right: 16px;
 
@@ -245,13 +272,19 @@ body.light-mode .cem-header {
   color: var(--accent);
 }
 
-/* TEXTAREA */
+/* =========================================================
+   TEXTAREA
+========================================================= */
+
 .cem-textarea {
   min-height: 100px;
   resize: vertical;
 }
 
-/* FOCUS */
+/* =========================================================
+   FOCUS
+========================================================= */
+
 .cem-input:focus,
 .cem-select:focus,
 .cem-textarea:focus {
@@ -262,7 +295,51 @@ body.light-mode .cem-header {
   background: var(--darkest);
 }
 
-/* ACTIONS */
+/* =========================================================
+   LIGHT MODE INPUTS
+========================================================= */
+
+.light-mode .cem-input,
+.light-mode .cem-select,
+.light-mode .cem-textarea,
+body.light-mode .cem-input,
+body.light-mode .cem-select,
+body.light-mode .cem-textarea {
+  background: rgba(255, 255, 255, 0.85) !important;
+
+  border-color: rgba(0, 0, 0, 0.15) !important;
+
+  color: var(--accent) !important;
+
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.light-mode .cem-input:focus,
+.light-mode .cem-select:focus,
+.light-mode .cem-textarea:focus,
+body.light-mode .cem-input:focus,
+body.light-mode .cem-select:focus,
+body.light-mode .cem-textarea:focus {
+  background: #fff !important;
+
+  border-color: var(--deep) !important;
+
+  box-shadow:
+    0 0 0 3px rgba(52, 33, 55, 0.15),
+    inset 0 1px 3px rgba(0, 0, 0, 0.05) !important;
+}
+
+/* OPTIONS */
+.light-mode .cem-select option,
+body.light-mode .cem-select option {
+  background: #fff !important;
+  color: var(--accent) !important;
+}
+
+/* =========================================================
+   ACTIONS
+========================================================= */
+
 .cem-actions {
   display: flex;
   justify-content: flex-end;
@@ -271,7 +348,10 @@ body.light-mode .cem-header {
   margin-top: 24px;
 }
 
-/* BUTTON */
+/* =========================================================
+   BUTTON
+========================================================= */
+
 .cem-btn {
   border: none;
 
@@ -314,120 +394,6 @@ body.light-mode .cem-header {
   box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
 }
 
-/* RESPONSIVE */
-@media (max-width: 600px) {
-  .cem-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .cem-body {
-    padding: 20px;
-  }
-
-  .cem-header {
-    padding: 20px;
-  }
-
-  .cem-title {
-    font-size: 1.4rem;
-  }
-
-  .cem-modal {
-    max-width: 90vw;
-    margin: 10px;
-  }
-}
-
-/* =========================================================
-   MOBILE RESPONSIVE + SCROLL FIX
-========================================================= */
-
-.cem-overlay {
-  position: fixed;
-  inset: 0;
-
-  background: rgba(0, 0, 0, 0.65);
-  backdrop-filter: blur(12px);
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  z-index: 9999;
-
-  padding: 20px;
-
-  overflow-y: auto; /* ✅ MOBILE SCROLL */
-  overflow-x: hidden;
-
-  -webkit-overflow-scrolling: touch;
-
-  animation: fadeIn 0.3s ease;
-}
-
-/* =========================================================
-   MODAL
-========================================================= */
-
-.cem-modal {
-  width: 100%;
-  max-width: 520px;
-
-  border-radius: 20px;
-  overflow: hidden;
-
-  position: relative;
-
-  background: var(--darkest);
-  border: 1px solid var(--primary);
-
-  box-shadow:
-    0 20px 60px rgba(0, 0, 0, 0.4),
-    inset 0 1px 0 rgba(255, 255, 255, 0.1);
-
-  animation: popup 0.35s ease;
-  backdrop-filter: blur(20px);
-
-  max-height: 90vh; /* ✅ HEIGHT LIMIT */
-  display: flex;
-  flex-direction: column;
-}
-
-/* =========================================================
-   BODY SCROLL
-========================================================= */
-
-.cem-body {
-  padding: 24px;
-
-  overflow-y: auto; /* ✅ INNER SCROLL */
-  overflow-x: hidden;
-
-  flex: 1;
-
-  scrollbar-width: thin;
-}
-
-/* SCROLLBAR */
-.cem-body::-webkit-scrollbar {
-  width: 6px;
-}
-
-.cem-body::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.2);
-  border-radius: 10px;
-}
-
-/* =========================================================
-   GRID
-========================================================= */
-
-.cem-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 14px;
-}
-
 /* =========================================================
    MOBILE TABLET
 ========================================================= */
@@ -435,7 +401,7 @@ body.light-mode .cem-header {
 @media (max-width: 768px) {
   .cem-overlay {
     padding: 14px;
-    align-items: flex-start; /* ✅ TOP ALIGN */
+    align-items: flex-start;
   }
 
   .cem-modal {
@@ -470,8 +436,12 @@ body.light-mode .cem-header {
   .cem-input,
   .cem-select,
   .cem-textarea {
-    font-size: 16px; /* ✅ iOS zoom fix */
+    font-size: 16px;
     padding: 13px 14px;
+  }
+
+  .cem-image-input {
+    font-size: 15px;
   }
 
   .cem-textarea {
@@ -533,6 +503,10 @@ body.light-mode .cem-header {
   .cem-textarea {
     border-radius: 12px;
     padding: 12px;
+  }
+
+  .cem-image-input {
+    font-size: 14px;
   }
 
   .cem-btn {
